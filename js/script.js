@@ -321,3 +321,52 @@ if (orbitContainer) {
 // if (tubesApp.camera) {
 //     tubesApp.camera.position.z *= 2;
 // }
+
+// ===================================================
+// JOURNEY TIMELINE — Scroll Progress Line + Card Fade-in
+// ===================================================
+(function initJourneyTimeline() {
+    const journeySection = document.getElementById('journey');
+    const progressEl = document.getElementById('timeline-progress');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    if (!journeySection || !progressEl || timelineItems.length === 0) return;
+
+    // ---  1. Scroll-tracking progress line  ---
+    function updateProgress() {
+        const rect = journeySection.getBoundingClientRect();
+        const sectionH = journeySection.offsetHeight;
+        const viewportH = window.innerHeight;
+
+        // How far the user has scrolled INTO the section (0 → sectionH)
+        const scrolled = Math.max(0, -rect.top); // px past the section's top
+        const fillable = sectionH - viewportH;    // scrollable range within section
+
+        const pct = fillable > 0
+            ? Math.min(100, (scrolled / fillable) * 100)
+            : 100;
+
+        progressEl.style.height = pct + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress(); // initialise on load
+
+    // ---  2. IntersectionObserver — staggered card fade-ins  ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // fire once
+            }
+        });
+    }, {
+        threshold: 0.15 // trigger when 15% of the card is visible
+    });
+
+    timelineItems.forEach((item, idx) => {
+        // Apply a staggered delay so cards cascade nicely
+        item.style.transitionDelay = `${idx * 0.08}s`;
+        observer.observe(item);
+    });
+})();
