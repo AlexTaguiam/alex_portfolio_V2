@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex | Junior Web Developer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Animated Canvas Backgrounds -->
+    <canvas id="starfield"></canvas>
+    <!-- <canvas id="tubes-cursor"></canvas> -->
+
+    <!-- Navigation -->
+    <header class="header-container">
+        <nav class="nav-pill">
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-dots">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="projects.html" class="btn btn-outline-dark">Resume</a>
+                <div class="glow-wrapper">
+                    <div class="glow-bg"></div>
+                    <a href="#contact" class="btn btn-white-glow">Contact</a>
+                </div>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+            </ul>
+            <div class="mobile-cta">
+                <a href="projects.html" class="btn btn-outline-dark">Resume</a>
+                <a href="#contact" class="btn btn-white-glow" style="margin-top:0.5rem;">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <p class="subtitle">JUNIOR WEB DEVELOPER</p>
+            <h1 class="main-title">Turning ideas into <br>digital reality</h1>
+            <p class="description">
+                From a zero-knowledge IT student at Cagayan State University to a passionate MERN stack developer. My
+                journey is about embracing challenges and building solutions that matter.
+            </p>
+            <div class="hero-buttons">
+                <a href="projects.html" class="btn btn-primary">Explore Work</a>
+                <a href="#about" class="btn btn-secondary">About My Journey</a>
+            </div>
+        </div>
+
+        <!-- The Glowing Planet Art Container -->
+        <div class="planet-container">
+            <div class="planet"></div>
+            <div class="horizon"></div>
+        </div>
+    </section>
+
+    <!-- Other Sections -->
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2 class="section-title">Orbiting Skills</h2>
+        </div>
+        <div class="orbit-wrapper">
+            <div class="orbit-container" id="orbit-container">
+                <!-- Background pattern -->
+                <div class="orbit-bg-pattern"></div>
+
+                <!-- Central "Code" Icon -->
+                <div class="center-code-icon">
+                    <div class="glow-cyan animate-pulse"></div>
+                    <div class="glow-purple animate-pulse delay-1s"></div>
+                    <div class="code-svg-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                            stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#06B6D4" />
+                                    <stop offset="100%" stop-color="#9333EA" />
+                                </linearGradient>
+                            </defs>
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Rings and Icons injected via JS -->
+            </div>
+        </div>
+    </section>
+    <section id="struggles" style="height: 100vh;"></section>
+    <section id="tech" style="height: 100vh;"></section>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
