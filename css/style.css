@@ -286,7 +286,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* --- Hero Section --- */
+/* --- Original Hero Section --- */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -295,7 +295,6 @@ body {
     justify-content: center;
     position: relative;
     padding-top: 100px;
-    /* Accounts for navbar */
     text-align: center;
     overflow: hidden;
 }
@@ -305,15 +304,6 @@ body {
     max-width: 800px;
     padding: 0 20px;
     animation: fadeInDown 1s ease-out forwards;
-}
-
-.subtitle {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
 }
 
 .main-title {
@@ -336,13 +326,6 @@ body {
     margin: 0 auto 2.5rem;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-/* Spaceship / Planet Artistic Elements */
 .planet-container {
     position: absolute;
     bottom: -20vh;
@@ -356,37 +339,151 @@ body {
     align-items: center;
 }
 
-/* The Glowing Planet */
 .planet {
     width: 500px;
     height: 500px;
     background: #050510;
-    /* Pitch black center */
     border-radius: 50%;
     position: absolute;
     top: 0px;
-    box-shadow:
-        0 0 100px 30px rgba(139, 49, 255, 0.8),
-        0 0 160px 80px rgba(96, 31, 230, 0.3),
-        inset 0 0 25px 4px rgba(255, 255, 255, 0.9);
-    /* Inner event horizon glow */
+    box-shadow: 0 0 100px 30px rgba(139, 49, 255, 0.8), 0 0 160px 80px rgba(96, 31, 230, 0.3), inset 0 0 25px 4px rgba(255, 255, 255, 0.9);
     animation: floatingPlanet 10s ease-in-out infinite;
 }
 
-/* The Horizon Line that blocks the bottom half of the planet */
 .horizon {
     position: absolute;
     bottom: 250px;
-    /* Align with middle of planet roughly */
     width: 200%;
     height: 300px;
     background: #050510;
-    /* Match space black body background */
     border-top: 1px solid rgba(139, 49, 255, 0.3);
-    /* Subtle purple edge */
     border-radius: 50% 50% 0 0 / 20px 20px 0 0;
-    /* Slight curve representing ground */
     box-shadow: 0 -20px 50px rgba(139, 49, 255, 0.1);
+}
+
+/* --- Profile Showcase Typography Overlapping --- */
+.profile-showcase {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* padding-top: 60px; */
+    background: rgba(31, 31, 31, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.profile-accent {
+    position: absolute;
+    width: clamp(200px, 30vw, 400px);
+    height: clamp(200px, 30vw, 400px);
+    z-index: 0;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+}
+
+/* Base Typographic Positioning */
+.profile-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    line-height: 0.9;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Background text - solid */
+.profile-text-bg {
+    z-index: 1;
+    color: #ffffff;
+    /* Stark white to contrast with space */
+}
+
+/* Overlay text - stroke only to cut through the person */
+.profile-text-overlay {
+    z-index: 3;
+    pointer-events: none;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+}
+
+.profile-line {
+    display: block;
+}
+
+.profile-line-1 {
+    font-size: clamp(2.5rem, 13vw, 11.5rem);
+    letter-spacing: clamp(1px, 2vw, 15px);
+}
+
+.profile-line-2 {
+    font-size: clamp(2.5rem, 11.5vw, 11rem);
+    letter-spacing: clamp(1px, 2vw, 15px);
+}
+
+.profile-image-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    height: 85vh;
+    /* Responsive height connecting to the edge */
+    display: flex;
+    align-items: flex-end;
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+
+
+
+.profile-img {
+    position: relative;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 -10px 20px rgba(0, 0, 0, 0.5));
+    /* padding-bottom: 10%; */
+}
+
+.profile-img::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    /* adjust fade height */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+}
+
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
 /* Animations */
