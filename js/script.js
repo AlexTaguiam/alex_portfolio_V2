@@ -370,3 +370,62 @@ if (orbitContainer) {
         observer.observe(item);
     });
 })();
+
+// ===================================================
+// FOOTER — TextHoverEffect (vanilla JS port)
+// ===================================================
+(function initFooterHoverEffect() {
+    // --- Copyright year ---
+    const yearEl = document.getElementById('footer-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // --- Cursor-tracking radial gradient reveal ---
+    const svg        = document.getElementById('footer-hover-svg');
+    const revealGrad = document.getElementById('footerRevealMask');
+    const outline    = document.getElementById('footer-text-outline');
+
+    if (!svg || !revealGrad || !outline) return;
+
+    // Lerp for smooth cursor tracking
+    let targetCx = 50, targetCy = 50;  // percentages
+    let currentCx = 50, currentCy = 50;
+    let rafId = null;
+    let isHovered = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function tick() {
+        currentCx = lerp(currentCx, targetCx, 0.12);
+        currentCy = lerp(currentCy, targetCy, 0.12);
+
+        // Update the SVG radialGradient centre
+        revealGrad.setAttribute('cx', currentCx + '%');
+        revealGrad.setAttribute('cy', currentCy + '%');
+
+        rafId = requestAnimationFrame(tick);
+    }
+
+    svg.addEventListener('mouseenter', () => {
+        isHovered = true;
+        outline.style.opacity = '0.7';
+        if (!rafId) rafId = requestAnimationFrame(tick);
+    });
+
+    svg.addEventListener('mouseleave', () => {
+        isHovered = false;
+        outline.style.opacity = '0';
+        // Keep animating until cursor animation settles, then stop
+        setTimeout(() => {
+            if (!isHovered) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        }, 600);
+    });
+
+    svg.addEventListener('mousemove', (e) => {
+        const rect = svg.getBoundingClientRect();
+        targetCx = ((e.clientX - rect.left) / rect.width)  * 100;
+        targetCy = ((e.clientY - rect.top)  / rect.height) * 100;
+    });
+})();
