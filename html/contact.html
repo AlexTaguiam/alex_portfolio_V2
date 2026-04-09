@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex | Contact</title>
+    <meta name="description" content="Get in touch with Alex Taguiam — junior web developer based in the Philippines.">
+    <!-- Fonts: system stack only in contact.css so this page works offline (no CDN). -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+
+<body>
+    <canvas id="starfield"></canvas>
+
+    <header class="header-container">
+        <nav class="nav-pill">
+            <div class="logo">
+                <a href="../index.html">
+                    <div class="logo-dots">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <!-- Dropdown for Current Page Sections -->
+                <li class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">This Page</span>
+                    <div class="nav-dropdown-content">
+                        <a href="#contact-form" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            Message Me
+                        </a>
+                        <a href="mailto:alexdev@email.com" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            Direct Email
+                        </a>
+                        <a href="https://github.com/AlexTaguiam" class="nav-dropdown-item" target="_blank">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Dropdown for Other Pages -->
+                <li class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">Navigate</span>
+                    <div class="nav-dropdown-content">
+                        <a href="../index.html" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Home
+                        </a>
+                        <a href="work.html" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                            Projects
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="#" class="btn btn-outline-dark">Resume</a>
+                <div class="glow-wrapper">
+                    <div class="glow-bg"></div>
+                    <a href="contact.html" class="btn btn-white-glow nav-active">Contact</a>
+                </div>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="work.html">Projects</a></li>
+                <li><a href="#contact-form">Message Me</a></li>
+                <li><a href="mailto:alexdev@email.com">Email Me</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="contact-page__glow" aria-hidden="true"></div>
+
+    <div class="contact-bg-typography" aria-hidden="true">
+        <span>Contact</span>
+    </div>
+
+    <div class="contact-circuits" aria-hidden="true">
+        <svg class="cc-tl" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8h60v24H8V8z" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+            <path d="M76 8h48M124 8v32M124 40h-40" stroke="currentColor" stroke-width="0.8" />
+            <circle cx="124" cy="8" r="3" fill="currentColor" />
+            <circle cx="124" cy="40" r="2.5" fill="currentColor" opacity="0.7" />
+            <path d="M8 44h52v28H8V44z" stroke="currentColor" stroke-width="0.8" opacity="0.4" />
+            <path d="M140 56h52v48h-52V56z" stroke="currentColor" stroke-width="0.8" />
+            <path d="M168 8v36M168 56V104M8 84h180" stroke="currentColor" stroke-width="0.6" opacity="0.45" />
+            <circle cx="168" cy="8" r="3" fill="currentColor" />
+            <circle cx="8" cy="84" r="2.5" fill="currentColor" opacity="0.8" />
+        </svg>
+        <svg class="cc-tr" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8h60v24H8V8z" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+            <path d="M76 8h48M124 8v32M124 40h-40" stroke="currentColor" stroke-width="0.8" />
+            <circle cx="124" cy="8" r="3" fill="currentColor" />
+            <circle cx="124" cy="40" r="2.5" fill="currentColor" opacity="0.7" />
+            <path d="M8 44h52v28H8V44z" stroke="currentColor" stroke-width="0.8" opacity="0.4" />
+            <path d="M140 56h52v48h-52V56z" stroke="currentColor" stroke-width="0.8" />
+            <path d="M168 8v36M168 56V104M8 84h180" stroke="currentColor" stroke-width="0.6" opacity="0.45" />
+            <circle cx="168" cy="8" r="3" fill="currentColor" />
+            <circle cx="8" cy="84" r="2.5" fill="currentColor" opacity="0.8" />
+        </svg>
+    </div>
+
+    <main class="contact-page">
+        <div class="contact-layout">
+            <div class="contact-intro">
+                <div class="contact-intro-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                        <path d="M12 17h.01" />
+                    </svg>
+                    Contact
+                </div>
+                <h1 class="contact-intro-title">Get in touch</h1>
+                <p class="contact-intro-desc">
+                    Have a project in mind, a question about my work, or just want to say hello? Drop a message — I reply
+                    to every thoughtful note.
+                </p>
+
+                <div class="contact-cards">
+                    <article class="contact-card">
+                        <div class="contact-card__icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2" />
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="contact-card__label">Email</p>
+                            <p class="contact-card__value"><a href="mailto:alexdev@email.com">alexdev@email.com</a></p>
+                        </div>
+                        <a class="contact-card__go" href="mailto:alexdev@email.com" aria-label="Open email">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="contact-card">
+                        <div class="contact-card__icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="contact-card__label">GitHub</p>
+                            <p class="contact-card__value"><a href="https://github.com/AlexTaguiam" target="_blank"
+                                    rel="noopener">github.com/AlexTaguiam</a></p>
+                        </div>
+                        <a class="contact-card__go" href="https://github.com/AlexTaguiam" target="_blank" rel="noopener"
+                            aria-label="Open GitHub profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="contact-card">
+                        <div class="contact-card__icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="contact-card__label">Location</p>
+                            <p class="contact-card__value">Cagayan Valley, Philippines</p>
+                        </div>
+                        <span class="contact-card__go contact-card__go--static" aria-hidden="true" title="Region">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </span>
+                    </article>
+                </div>
+            </div>
+
+            <div class="contact-form-wrap">
+                <div class="contact-form-inner">
+                    <div class="contact-form-header">
+                        <h2>Send a message</h2>
+                    </div>
+
+                    <!-- Submits via mailto: — works offline; opens the default mail app when the user sends. -->
+                    <form class="contact-form" id="contact-form" action="#" method="get" novalidate>
+                        <div class="contact-row">
+                            <div class="contact-field contact-field--half">
+                                <label class="contact-label" for="name">Name</label>
+                                <input class="contact-input" id="name" name="name" type="text" autocomplete="name"
+                                    placeholder="Alex Taguiam" required>
+                            </div>
+                            <div class="contact-field contact-field--half">
+                                <label class="contact-label" for="email">Email</label>
+                                <input class="contact-input" id="email" name="email" type="email" autocomplete="email"
+                                    placeholder="you@example.com" required>
+                            </div>
+                        </div>
+                        <div class="contact-field">
+                            <label class="contact-label" for="subject">Subject <span class="optional">optional</span></label>
+                            <input class="contact-input" id="subject" name="subject" type="text"
+                                placeholder="e.g. Collaboration, internship, freelance">
+                        </div>
+                        <div class="contact-field">
+                            <label class="contact-label" for="message">Message</label>
+                            <textarea class="contact-textarea" id="message" name="message" maxlength="2000"
+                                placeholder="What would you like to build or discuss?" required></textarea>
+                            <div class="contact-textarea-footer"><span id="msg-count">0</span> / 2000</div>
+                        </div>
+                        <button type="submit" class="contact-submit">Send message</button>
+                        <p class="contact-form-note">
+                            Opens your email app with this message addressed to
+                            <a href="mailto:alexdev@email.com">alexdev@email.com</a> — no internet required to open the
+                            form.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/script.js"></script>
+    <script>
+        (function () {
+            var ta = document.getElementById('message');
+            var count = document.getElementById('msg-count');
+            if (ta && count) {
+                function sync() {
+                    count.textContent = String(ta.value.length);
+                }
+                ta.addEventListener('input', sync);
+                sync();
+            }
+
+            var form = document.getElementById('contact-form');
+            if (!form) return;
+            var to = 'alexdev@email.com';
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var nameEl = document.getElementById('name');
+                var emailEl = document.getElementById('email');
+                var subjectEl = document.getElementById('subject');
+                var messageEl = document.getElementById('message');
+                if (!nameEl || !emailEl || !messageEl) return;
+                var name = nameEl.value.trim();
+                var from = emailEl.value.trim();
+                var subjectLine = (subjectEl && subjectEl.value.trim()) ? subjectEl.value.trim() : 'Portfolio contact';
+                var body = 'Name: ' + name + '\r\nReply-to: ' + from + '\r\n\r\n' + messageEl.value.trim();
+                var href = 'mailto:' + encodeURIComponent(to)
+                    + '?subject=' + encodeURIComponent(subjectLine)
+                    + '&body=' + encodeURIComponent(body);
+                window.location.href = href;
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -33,16 +33,62 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#">Expirience</a></li>
-                <li><a href="#projects" class="nav-active">Projects</a></li>
+                <!-- Dropdown for Current Page Sections -->
+                <li class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">This Page</span>
+                    <div class="nav-dropdown-content">
+                        <a href="#projects" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="14" x="2" y="3" rx="2" />
+                                <line x1="8" x2="16" y1="21" y2="21" />
+                                <line x1="12" x2="12" y1="17" y2="21" />
+                            </svg>
+                            Projects
+                        </a>
+                        <a href="#testimonials" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            Testimonials
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Dropdown for Other Pages -->
+                <li class="nav-dropdown">
+                    <span class="nav-dropdown-trigger">Navigate</span>
+                    <div class="nav-dropdown-content">
+                        <a href="../index.html" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                            Home
+                        </a>
+                        <a href="contact.html" class="nav-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2" />
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                            </svg>
+                            Contact
+                        </a>
+                    </div>
+                </li>
             </ul>
 
             <div class="nav-cta">
                 <a href="#" class="btn btn-outline-dark">Resume</a>
                 <div class="glow-wrapper">
-                    <div class="glow-bg">Expirience</div>
-                    <a href="#contact" class="btn btn-white-glow">Contact</a>
+                    <div class="glow-bg"></div>
+                    <a href="contact.html" class="btn btn-white-glow">Contact</a>
                 </div>
             </div>
 
@@ -56,28 +102,28 @@
         <div class="mobile-menu" id="mobile-menu">
             <ul class="mobile-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="#">Expirience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="mobile-cta">
                 <a href="#" class="btn btn-outline-dark">Resume</a>
-                <a href="#contact" class="btn btn-white-glow" style="margin-top:0.5rem;">Contact</a>
+                <a href="contact.html" class="btn btn-white-glow" style="margin-top:0.5rem;">Contact</a>
             </div>
         </div>
     </header>
 
     <!-- ===================================================
-         PROJECTS HERO SECTION
+         PROJECTS & TESTIMONIALS HERO SECTION
          =================================================== -->
     <section class="work-hero">
         <!-- Animated Wave Canvas Background -->
         <canvas id="wave-canvas"></canvas>
         <div class="work-hero-content">
             <p class="work-eyebrow">Selected Work</p>
-            <h1 class="work-hero-title">Projects I've Built</h1>
+            <h1 class="work-hero-title">Projects & Testimonials</h1>
             <p class="work-hero-desc">
-                Real-world applications designed, developed, and shipped&mdash;each one a step forward in my journey as
-                a full-stack developer.
+                A showcase of full-stack applications and what users say about them—turning code into lived experiences.
             </p>
         </div>
         <!-- Fade bottom into page -->
@@ -340,6 +386,343 @@
                 </div>
             </article>
 
+        </div>
+    </section>
+
+    <!-- ===================================================
+         TESTIMONIALS SECTION
+         =================================================== -->
+    <section id="testimonials" class="testimonials-section"
+        style="padding: 8rem 1.5rem; overflow: hidden; background: rgba(10, 10, 26, 0.3);">
+        <div class="projects-container">
+            <!-- Section label -->
+            <div class="projects-header" style="margin-bottom: 4rem;">
+                <span class="projects-eyebrow">04 Testimonials</span>
+                <div class="projects-header-line"></div>
+                <h2
+                    style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; margin-top: 1rem; color: var(--text-main);">
+                    What People Say</h2>
+            </div>
+
+            <div class="testimonials-3d-wrap"
+                style="position: relative; perspective: 1000px; display: flex; justify-content: center; width: 100%; overflow: hidden;">
+                <div class="testimonials-inner-grid"
+                    style="display: flex; flex-direction: row; gap: 1.5rem; transform: rotateX(20deg) rotateY(-10deg) rotateZ(10deg) translateZ(-50px);">
+
+                    <!-- Marquee Group 1 (Vertical) -->
+
+                    <div class="marquee-container" data-vertical="true" style="--duration: 40s; height: 500px;">
+                        <div class="marquee-content">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/32.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Ava Green 🇦🇺</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@ava</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Cascade AI made my workflow 10x faster!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/68.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Ana Miller 🇩🇪</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@ana</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Vertical marquee is a game changer!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/51.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Mateo Rossi 🇮🇹</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@mat</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Animations are buttery smooth!"</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marquee-content" aria-hidden="true">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/32.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Ava Green 🇦🇺</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@ava</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Cascade AI made my workflow 10x faster!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/68.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Ana Miller 🇩🇪</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@ana</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Vertical marquee is a game changer!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/51.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Mateo Rossi 🇮🇹</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@mat</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Animations are buttery smooth!"</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marquee Group 2 (Vertical Reverse) -->
+                    <div class="marquee-container" data-vertical="true" data-reverse="true"
+                        style="--duration: 35s; height: 500px;">
+                        <div class="marquee-content">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/53.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Maya Patel 🇮🇳</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@maya</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Setup
+                                        was a breeze!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/33.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Noah Smith 🇺🇸</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@noah</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Best
+                                        marquee component!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/22.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Lucas Stone 🇫🇷</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@luc</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Very
+                                        customizable and smooth."</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marquee-content" aria-hidden="true">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/53.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Maya Patel 🇮🇳</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@maya</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Setup
+                                        was a breeze!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/33.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Noah Smith 🇺🇸</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@noah</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Best
+                                        marquee component!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/22.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Lucas Stone 🇫🇷</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@luc</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Very
+                                        customizable and smooth."</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marquee Group 3 (Vertical) -->
+                    <div class="marquee-container" data-vertical="true" style="--duration: 45s; height: 500px;">
+                        <div class="marquee-content">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/85.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Haruto Sato 🇯🇵</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@haru</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Impressive performance on mobile!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/45.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Emma Lee 🇨🇦</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@emma</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Love
+                                        the pause on hover feature!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/61.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Carlos Ray 🇪🇸</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@carl</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Great
+                                        for testimonials and logos."</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="marquee-content" aria-hidden="true">
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/85.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Haruto Sato 🇯🇵</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@haru</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                                        "Impressive performance on mobile!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img
+                                                src="https://randomuser.me/api/portraits/women/45.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Emma Lee 🇨🇦</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@emma</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Love
+                                        the pause on hover feature!"</blockquote>
+                                </div>
+                            </div>
+                            <div class="ui-card" style="width: 280px;">
+                                <div class="ui-card-content">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div class="ui-avatar"><img src="https://randomuser.me/api/portraits/men/61.jpg"
+                                                class="ui-avatar-image" alt=""></div>
+                                        <div>
+                                            <div style="font-size: 0.875rem; font-weight: 600;">Carlos Ray 🇪🇸</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-muted);">@carl</div>
+                                        </div>
+                                    </div>
+                                    <blockquote
+                                        style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">"Great
+                                        for testimonials and logos."</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Gradient overlays for vertical marquee -->
+                <div
+                    style="pointer-events: none; position: absolute; left: 0; top: 0; width: 100%; height: 20%; background: linear-gradient(to bottom, var(--space-black), transparent); z-index: 10;">
+                </div>
+                <div
+                    style="pointer-events: none; position: absolute; left: 0; bottom: 0; width: 100%; height: 20%; background: linear-gradient(to top, var(--space-black), transparent); z-index: 10;">
+                </div>
+            </div>
         </div>
     </section>
 
