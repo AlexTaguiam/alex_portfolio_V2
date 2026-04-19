@@ -2,11 +2,7 @@
    CONTACT PAGE — glass + hero typography layer
    =================================================== */
 
-/* Offline-first: no Google Fonts CDN required; stacks match style.css when fonts are absent. */
-:root {
-    --font-display: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
+/* Offline-first: using global variables from style.css. */
 
 .nav-active {
     color: var(--glow-blue) !important;

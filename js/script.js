@@ -1,3 +1,47 @@
+// ===================================================
+// GLOBAL UI - Preloader & Magnetic Buttons
+// ===================================================
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Minimum delay to ensure the animations look smooth
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+        }, 1000);
+    }
+});
+
+(function initMagneticButtons() {
+    // Select buttons and nav icons for magnetic effect
+    const magneticEls = document.querySelectorAll('.btn, .nav-links a, .logo, .footer-social-icon, .contact-card__go, .nav-dropdown-trigger');
+
+    magneticEls.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            window.isHoveringInteractive = true;
+        });
+
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Subtle pull
+            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            if (el.querySelector('.glow-bg')) {
+                el.querySelector('.glow-bg').style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            window.isHoveringInteractive = false;
+            el.style.transform = `translate(0px, 0px)`;
+            if (el.querySelector('.glow-bg')) {
+                el.querySelector('.glow-bg').style.transform = `translate(0px, 0px)`;
+            }
+        });
+    });
+})();
+
 // Starfield Animation
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
@@ -79,23 +123,16 @@ const mobileMenu = document.getElementById('mobile-menu');
 
 if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        if (mobileMenu.classList.contains('open')) {
-            mobileMenu.style.display = 'flex';
-            // Wait for next frame to apply transition
-            requestAnimationFrame(() => {
-                mobileMenu.style.opacity = '1';
-                mobileMenu.style.transform = 'translateY(0)';
-            });
-        } else {
-            mobileMenu.style.opacity = '0';
-            mobileMenu.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                if (!mobileMenu.classList.contains('open')) {
-                    mobileMenu.style.display = 'none';
-                }
-            }, 300); // matches css transition
-        }
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
     });
 }
 
@@ -368,6 +405,142 @@ if (orbitContainer) {
         // Apply a staggered delay so cards cascade nicely
         item.style.transitionDelay = `${idx * 0.08}s`;
         observer.observe(item);
+    });
+})();
+
+
+// --- Phoenix Flame Cursor Trail Logic ---
+(function initFlameCursor() {
+    const canvas = document.getElementById('cursor-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    let mouse = { x: 0, y: 0 };
+    let lastMouse = { x: 0, y: 0 };
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (e) => {
+        lastMouse.x = mouse.x;
+        lastMouse.y = mouse.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        
+        // Add silky particles only if NOT hovering interactive elements
+        if (!window.isHoveringInteractive) {
+            for (let i = 0; i < 4; i++) {
+                particles.push(new PhoenixParticle(mouse.x, mouse.y));
+            }
+        }
+    });
+
+    class PhoenixParticle {
+        constructor(x, y) {
+            this.x = x + (Math.random() - 0.5) * 15;
+            this.y = y + (Math.random() - 0.5) * 15;
+            
+            // "Silky" physics: very slow horizontal drift, smooth upward flow
+            this.vx = (Math.random() - 0.5) * 0.8;
+            this.vy = -(Math.random() * 1.5 + 0.5); 
+            
+            this.size = Math.random() * 25 + 10;
+            this.life = 1.0;
+            this.decay = Math.random() * 0.02 + 0.01; // Slower life for "wispy" look
+            
+            // Movement randomness for "liquid-like" feel
+            this.tilt = Math.random() * Math.PI * 2;
+            this.tiltSpeed = (Math.random() - 0.5) * 0.05;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            // Faster decay if hovering interactive elements (fade out trails)
+            const decayFactor = window.isHoveringInteractive ? 3 : 1;
+            this.life -= this.decay * decayFactor;
+            
+            this.size *= 0.98; // Tapering
+            this.tilt += this.tiltSpeed;
+            // Slight horizontal weave
+            this.vx += Math.sin(this.tilt) * 0.1;
+        }
+
+        draw() {
+            if (this.life <= 0) return;
+            
+            ctx.save();
+            ctx.globalAlpha = this.life;
+            ctx.globalCompositeOperation = 'screen';
+            
+            // Outer Edge: Cyan/Azure
+            const gradient = ctx.createRadialGradient(
+                this.x, this.y, 0,
+                this.x, this.y, this.size
+            );
+            gradient.addColorStop(0, 'rgba(255, 247, 0, 0.9)'); // Lemon Yellow center
+            gradient.addColorStop(0.4, 'rgba(0, 224, 255, 0.5)'); // Cyan middle
+            gradient.addColorStop(1, 'rgba(60, 162, 250, 0)'); // Azure outer
+            
+            ctx.fillStyle = gradient;
+            ctx.shadowBlur = 10 * this.life;
+            ctx.shadowColor = '#00e0ff';
+            
+            ctx.beginPath();
+            // Wispy "silk" shape: elongated ellipse
+            ctx.ellipse(this.x, this.y, this.size * 0.4, this.size, this.tilt, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            particles[i].draw();
+            if (particles[i].life <= 0) {
+                particles.splice(i, 1);
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    animate();
+})();
+
+// --- General Scroll Animations (Fade-in-up) ---
+(function initScrollReveals() {
+    // Exclude sections that handle their own reveals (like work hero or projects)
+    const revealElements = document.querySelectorAll('section:not(.work-hero), .hero-content, .about-content, .site-footer');
+    
+    const observerOptions = {
+        threshold: 0.05, // Trigger earlier
+        rootMargin: '0px 0px -20px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => {
+        // Only add if not already visible/revealed
+        if (!el.classList.contains('reveal-visible')) {
+            el.classList.add('reveal-hidden');
+            observer.observe(el);
+        }
     });
 })();
 

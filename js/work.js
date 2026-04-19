@@ -100,29 +100,31 @@
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, idx) => {
             if (entry.isIntersecting) {
-                // Small stagger so multiple visible cards cascade
                 const delay = idx * 0.08;
                 entry.target.style.transitionDelay = `${delay}s`;
+                // Add BOTH visible (for work.css) and reveal-visible (for global)
                 entry.target.classList.add('visible');
+                entry.target.classList.add('reveal-visible');
                 observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.12
+        threshold: 0.1, // Trigger slightly earlier
+        rootMargin: '0px 0px -50px 0px'
     });
 
-    cards.forEach(card => observer.observe(card));
+    cards.forEach(card => {
+        // Ensure they start hidden (classes might уже be on them, but we ensure)
+        observer.observe(card);
+    });
 })();
 
 
 // ── 3. Image placeholder visibility toggle ────────────
-// When the real <img> loads correctly hide the placeholder;
-// when it errors the onerror on the img tag already does this.
 (function initImageFallbacks() {
     const imgs = document.querySelectorAll('.project-img');
     imgs.forEach(img => {
         if (img.complete && img.naturalWidth > 0) {
-            // Image already loaded — hide placeholder
             const placeholder = img.nextElementSibling;
             if (placeholder && placeholder.classList.contains('project-img-placeholder')) {
                 placeholder.style.display = 'none';
@@ -134,6 +136,24 @@
                     placeholder.style.display = 'none';
                 }
             });
+        }
+    });
+})();
+
+// ── 4. Marquee Force Duplicate ────────────────────────
+// Ensures vertical marquee has enough clones to be seamless
+(function initMarqueeCloner() {
+    const marquees = document.querySelectorAll('.marquee-container');
+    marquees.forEach(marquee => {
+        const content = marquee.querySelector('.marquee-content');
+        if (!content) return;
+        
+        // If we only have 1 or 2 clones, add one more just in case
+        const clones = marquee.querySelectorAll('.marquee-content').length;
+        if (clones < 3) {
+            const clone = content.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            marquee.appendChild(clone);
         }
     });
 })();
