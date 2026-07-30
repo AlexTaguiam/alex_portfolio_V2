@@ -262,7 +262,7 @@ body {
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: color 0.3s, border-color 0.3s, background-color 0.3s;
 }
 
 .btn-outline-dark:hover {
@@ -306,7 +306,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
-  transition: all 0.3s;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
   display: inline-block;
 }
 
@@ -334,7 +334,7 @@ body {
   height: 2px;
   background-color: var(--text-main);
   border-radius: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left center;
 }
 
@@ -366,7 +366,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px) scale(0.95);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
@@ -414,7 +414,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-family: var(--font-display);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
   cursor: pointer;
 }
 
@@ -1018,10 +1018,12 @@ body {
 
 .timeline-progress {
   width: 100%;
-  height: 0%;
+  height: 100%;
+  transform-origin: top;
+  transform: scaleY(0);
   background: linear-gradient(to bottom, var(--glow-blue), var(--glow-purple));
   border-radius: 2px;
-  transition: height 0.1s linear;
+  transition: transform 0.1s linear;
   box-shadow: 0 0 12px rgba(0, 224, 255, 0.5);
 }
 
@@ -1771,7 +1773,7 @@ body {
   padding: 0.5rem;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1), transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.3s;
   z-index: 1000;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
@@ -1791,7 +1793,7 @@ body {
   text-decoration: none;
   font-size: 0.88rem;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: background 0.2s, color 0.2s;
   white-space: nowrap;
 }
 
@@ -1821,3 +1823,34 @@ body {
   transform: rotate(-135deg);
   margin-top: 3px;
 }
+
+
+/* ===================================================
+   PERFORMANCE OPTIMIZATIONS (Added per plan)
+   =================================================== */
+
+/* Content Visibility to skip rendering offscreen sections */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
+/* Disable heavy effects on low-end devices */
+.low-end-device .project-img-grid-overlay,
+.low-end-device .achievement-glow,
+.low-end-device .glow-bg,
+.low-end-device #footer-hover-svg {
+  display: none !important;
+  animation: none !important;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

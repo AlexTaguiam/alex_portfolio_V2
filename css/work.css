@@ -753,3 +753,24 @@
         justify-content: center;
     }
 }
+
+/* Fix responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .work-hero-title {
+    font-size: clamp(2rem, 8vw, 4rem) !important;
+  }
+  .testimonials-inner-grid {
+    transform: none !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  .marquee-container {
+    height: 300px !important;
+    width: 100% !important;
+  }
+  .ui-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+

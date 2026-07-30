@@ -1,6 +1,16 @@
 // ===================================================
 // GLOBAL UI - Preloader & Magnetic Buttons
 // ===================================================
+const isLowEndDevice = () => {
+    return (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+           (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+           window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+if (isLowEndDevice()) {
+    document.documentElement.classList.add('low-end-device');
+}
+
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
@@ -67,55 +77,55 @@ function createStars() {
     }
 }
 
+let starfieldRafId = null;
 function updateAndDraw() {
-    // Clear the canvas with a transparent fill to allow CSS background
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw and move stars
     ctx.fillStyle = 'white';
     for (let i = 0; i < stars.length; i++) {
         let star = stars[i];
-
-        // Move star closer
         star.z -= speed;
-
-        // If star goes past viewer, reset it
         if (star.z <= 0) {
             star.z = canvas.width;
             star.x = Math.random() * canvas.width;
             star.y = Math.random() * canvas.height;
         }
-
-        // Calculate perspective
         let sx = (star.x - canvas.width / 2) * (canvas.width / star.z) + canvas.width / 2;
         let sy = (star.y - canvas.height / 2) * (canvas.width / star.z) + canvas.height / 2;
-
-        // Scale size based on depth
         let size = star.size * (canvas.width / star.z);
-
-        // Only draw if within bounds
         if (sx > 0 && sx < canvas.width && sy > 0 && sy < canvas.height) {
             ctx.beginPath();
             ctx.arc(sx, sy, size, 0, Math.PI * 2);
-            // Add a little glow
             ctx.shadowBlur = 5;
             ctx.shadowColor = 'white';
             ctx.fill();
         }
     }
-
-    requestAnimationFrame(updateAndDraw);
+    starfieldRafId = requestAnimationFrame(updateAndDraw);
 }
 
-// Initialize
+let resizeTimeout;
 window.addEventListener('resize', () => {
-    resize();
-    createStars();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        resize();
+        createStars();
+    }, 150);
 });
 
 resize();
 createStars();
-updateAndDraw();
+
+const starfieldIo = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+        if (!starfieldRafId) starfieldRafId = requestAnimationFrame(updateAndDraw);
+    } else {
+        if (starfieldRafId) {
+            cancelAnimationFrame(starfieldRafId);
+            starfieldRafId = null;
+        }
+    }
+});
+if (canvas) starfieldIo.observe(canvas);
 
 // Hamburger Menu Logic
 const hamburger = document.getElementById('hamburger-menu');
@@ -275,6 +285,7 @@ if (orbitContainer) {
     let orbitTime = 0;
     let isOrbitPaused = false;
     let lastOrbitTime = performance.now();
+    let orbitRafId = null;
 
     orbitContainer.addEventListener('mouseenter', () => isOrbitPaused = true);
     orbitContainer.addEventListener('mouseleave', () => isOrbitPaused = false);
@@ -295,10 +306,23 @@ if (orbitContainer) {
             el.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`;
         });
 
-        requestAnimationFrame(animateOrbit);
+        orbitRafId = requestAnimationFrame(animateOrbit);
     }
 
-    requestAnimationFrame(animateOrbit);
+    const orbitIo = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            if (!orbitRafId) {
+                lastOrbitTime = performance.now();
+                orbitRafId = requestAnimationFrame(animateOrbit);
+            }
+        } else {
+            if (orbitRafId) {
+                cancelAnimationFrame(orbitRafId);
+                orbitRafId = null;
+            }
+        }
+    });
+    orbitIo.observe(orbitContainer);
 }
 
 // // --- Tubes Cursor Logic ---
@@ -370,20 +394,26 @@ if (orbitContainer) {
     if (!journeySection || !progressEl || timelineItems.length === 0) return;
 
     // ---  1. Scroll-tracking progress line  ---
+    let isTicking = false;
     function updateProgress() {
-        const rect = journeySection.getBoundingClientRect();
-        const sectionH = journeySection.offsetHeight;
-        const viewportH = window.innerHeight;
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                const rect = journeySection.getBoundingClientRect();
+                const sectionH = journeySection.offsetHeight;
+                const viewportH = window.innerHeight;
 
-        // How far the user has scrolled INTO the section (0 → sectionH)
-        const scrolled = Math.max(0, -rect.top); // px past the section's top
-        const fillable = sectionH - viewportH;    // scrollable range within section
+                const scrolled = Math.max(0, -rect.top); 
+                const fillable = sectionH - viewportH;    
 
-        const pct = fillable > 0
-            ? Math.min(100, (scrolled / fillable) * 100)
-            : 100;
+                const pct = fillable > 0
+                    ? Math.min(100, (scrolled / fillable) * 100)
+                    : 100;
 
-        progressEl.style.height = pct + '%';
+                progressEl.style.height = pct + '%';
+                isTicking = false;
+            });
+            isTicking = true;
+        }
     }
 
     window.addEventListener('scroll', updateProgress, { passive: true });
@@ -411,6 +441,7 @@ if (orbitContainer) {
 
 // --- Phoenix Flame Cursor Trail Logic ---
 (function initFlameCursor() {
+    if (document.documentElement.classList.contains('low-end-device')) return;
     const canvas = document.getElementById('cursor-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -499,6 +530,7 @@ if (orbitContainer) {
         }
     }
 
+    let flameRafId = null;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
@@ -510,11 +542,23 @@ if (orbitContainer) {
             }
         }
         
-        requestAnimationFrame(animate);
+        flameRafId = requestAnimationFrame(animate);
     }
 
     resize();
-    animate();
+    
+    // Only run if visible/moving to save CPU
+    let idleTimeout;
+    window.addEventListener('mousemove', () => {
+        if (!flameRafId) flameRafId = requestAnimationFrame(animate);
+        clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(() => {
+            if (particles.length === 0 && flameRafId) {
+                cancelAnimationFrame(flameRafId);
+                flameRafId = null;
+            }
+        }, 1000);
+    });
 })();
 
 // --- General Scroll Animations (Fade-in-up) ---
